@@ -1,0 +1,49 @@
+name: Run Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_subset:
+        description: 'Select the tests to run, either All or only the Subset of tests comparing and printing the stock symbol differences from the test data'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - subset
+  schedule:
+    - cron: '0 0 * * *'  # Runs every night at midnight UTC
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome
+        ports:
+          - 4444:4444
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      env:
+        DISPLAY: :99.0
+      run: |
+        if [ "${{ github.event.inputs.test_subset }}" == "all" ]; then
+          pytest
+        elif [ "${{ github.event.inputs.test_subset }}" == "subset" ]; then
+          pytest -v -s tests/test_google_finance_page.py::test_print_symbols_not_in_test_data tests/test_google_finance_page.py::test_print_test_data_not_in_symbols
+        fi
