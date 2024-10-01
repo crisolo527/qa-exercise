@@ -31,29 +31,31 @@ def test_get_stock_symbols(finance_page):
     # Part 3 - Load the Google Finance page and get stock symbols
     finance_page.load()
     assert finance_page.is_loaded(), "Google Finance page did not load correctly."
+
     stock_symbols = finance_page.get_stock_symbols()
+    print(f"Stock symbols on the page:\n{stock_symbols}")
     assert stock_symbols, "No stock symbols found on the Google Finance page."
 
 def test_print_symbols_not_in_test_data(finance_page):
-    # Parts 4 - Get stock symbols, and compare with test data
+    # Part 4 - Get stock symbols, and compare with test data
     test_data = ["NFLX", "MSFT", "TSLA"]
     finance_page.load()
     assert finance_page.is_loaded(), "Google Finance page did not load correctly."
-    stock_symbols = finance_page.get_stock_symbols()
 
-    symbols_not_in_test_data = [symbol for symbol in stock_symbols if symbol not in test_data]
+    stock_symbols = finance_page.get_stock_symbols()
 
     # Part 5 - Print all stock symbols on the page that are not in the test data
-    print("Stock symbols not in test data:", symbols_not_in_test_data)
+    symbols_not_in_test_data = [symbol for symbol in stock_symbols if symbol not in test_data]
+    print(f"Stock symbols on the page that are not in the test data symbols:\n{symbols_not_in_test_data}")
 
 def test_print_test_data_not_in_symbols(finance_page):
-    # Parts 4 - Get stock symbols, and compare with test data
+    # Part 4 - Get stock symbols, and compare with test data
     test_data = ["NFLX", "MSFT", "TSLA"]
     finance_page.load()
     assert finance_page.is_loaded(), "Google Finance page did not load correctly."
+
     stock_symbols = finance_page.get_stock_symbols()
 
-    test_data_not_in_symbols = [symbol for symbol in test_data if symbol not in stock_symbols]
-
     # Part 6 - Print all stock symbols in the test data that are not on the page
-    print("Test data not in stock symbols:", test_data_not_in_symbols)
+    test_data_not_in_symbols = [symbol for symbol in test_data if symbol not in stock_symbols]
+    print(f"Test data symbols that are not in the stock symbols on the page:\n{test_data_not_in_symbols}")
