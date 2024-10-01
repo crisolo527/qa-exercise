@@ -40,7 +40,7 @@ jobs:
         DISPLAY: :99.0
       run: |
         if [ "${{ github.event.inputs.test_subset }}" == "all" ]; then
-          xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest
+          xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest -v
         elif [ "${{ github.event.inputs.test_subset }}" == "subset" ]; then
-          xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest tests/test_google_finance_page.py::test_print_symbols_not_in_test_data tests/test_google_finance_page.py::test_print_test_data_not_in_symbols
+          xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest -v tests/test_google_finance_page.py::test_print_symbols_not_in_test_data tests/test_google_finance_page.py::test_print_test_data_not_in_symbols
         fi
