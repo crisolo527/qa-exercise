@@ -32,12 +32,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install xvfb
+      run: sudo apt-get install -y xvfb
+
     - name: Run tests
       env:
         DISPLAY: :99.0
       run: |
         if [ "${{ github.event.inputs.test_subset }}" == "all" ]; then
-          pytest
+          xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest
         elif [ "${{ github.event.inputs.test_subset }}" == "subset" ]; then
-          pytest tests/test_google_finance_page.py::test_print_symbols_not_in_test_data tests/test_google_finance_page.py::test_print_test_data_not_in_symbols
+          xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest tests/test_google_finance_page.py::test_print_symbols_not_in_test_data tests/test_google_finance_page.py::test_print_test_data_not_in_symbols
         fi
