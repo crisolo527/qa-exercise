@@ -1,4 +1,4 @@
-name: Google Finance Page Runs
+name: Manual Google Finance Page Runs
 
 on:
   workflow_dispatch:
@@ -11,11 +11,9 @@ on:
         options:
           - all
           - subset
-  schedule:
-    - cron: '0 7 * * *'
 
 jobs:
-  run-google-finance-page-tests:
+  manual-google-finance-page-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +37,7 @@ jobs:
       env:
         DISPLAY: :99.0
       run: |
-        if [ "${{ github.event.inputs.test_subset }}" == "all" ] || [ -z "${{ github.event.inputs.test_subset }}" ]; then
+        if [ "${{ github.event.inputs.test_subset }}" == "all" ]; then
           xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest -v -s
         elif [ "${{ github.event.inputs.test_subset }}" == "subset" ]; then
           xvfb-run -a --server-args="-screen 0 1920x1080x24" pytest -v -s tests/test_google_finance_page.py::test_print_symbols_not_in_test_data tests/test_google_finance_page.py::test_print_test_data_not_in_symbols
