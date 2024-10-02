@@ -58,5 +58,3 @@ In the GitHub Actions tab, see the history of the scheduled nightly executions a
 schedule:
     - cron: <CONFIGURED_UTC_TIME>
 ```    
-
-https://github.com/crisolo527/qa-exercise/blob/79fc69168339933cc00787bc7854128c0bbae6ab/.github/workflows/scheduled_workflow.yml#L5
