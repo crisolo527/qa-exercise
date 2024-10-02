@@ -45,14 +45,14 @@ pytest -v -s -k <INSERT_TEST_CASE_NAME>
 ### GitHub Actions Workflows
 
 #### Manual Workflow
-1. Navigate to the GitHub Actions tab.
-2. Navigate to the **[Manual Google Finance Page Runs](https://github.com/crisolo527/qa-exercise/actions/workflows/manual_workflow.yml)** tab in the left sidebar Actions tab.
-3. Click the "Run workflow" dropdown.
-4. Select "all" to run the entire set of test cases.
-5. Select "subset" to run only the two tests printing the data set comparisons to the Google Finance page.
-6. Click the green "Run workflow" button to execute the workflow.
+1. In the GitHub Actions tab, navigate to the **[Manual Google Finance Page Runs](https://github.com/crisolo527/qa-exercise/actions/workflows/manual_workflow.yml)**.
+2. Click the "Run workflow" dropdown.
+3. Select "all" to run the entire set of test cases.
+4. Select "subset" to run only the two tests printing the data set comparisons to the Google Finance page.
+5. Click the green "Run workflow" button to execute the workflow.
 
 #### Scheduled Workflow
+In the GitHub Actions tab, see the history of the scheduled nightly executions at the **[Nightly Google Finance Page Runs](https://github.com/crisolo527/qa-exercise/actions/workflows/scheduled_workflow.yml)**.
 - As set in the **[.github/workflows/scheduled_workflow.yml](https://github.com/crisolo527/qa-exercise/blob/main/.github/workflows/scheduled_workflow.yml)** file, the run will execute automatically at the set UTC time:
 ```sh
 schedule:
